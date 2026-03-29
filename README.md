@@ -1,28 +1,28 @@
 # SAR-Edu: Sistema de Apoio Robótico Educacional com Robix + Arduino Mega
 
-Projeto desenvolvido na disciplina de Robótica Industrial, orientada pelo Prof. Dr. Ronan Marcelo Martins, com foco em controle de um braço robótico do kit Robix via software próprio em Python.
+Projeto desenvolvido na disciplina de Robótica Industrial (Prof. Dr. Ronan Marcelo Martins), com foco no controle de um braço robótico do kit Robix por meio de software próprio em Python.
 
 ## Objetivo
 
-Desenvolver uma interface para controle de servomotores do braço robótico, visando uso didático em laboratório, com alternativa ao software original do kit Robix.
+Desenvolver uma interface para controle de servomotores do braço robótico com finalidade didática em laboratório, oferecendo alternativa ao software original do kit Robix.
 
 ## Funcionalidades principais
 
 - Controle em tempo real por sliders;
 - Envio de poses individuais;
 - Gravação de poses ensinadas;
-- Geração e execução de rotinas (mini compilador);
+- Geração e execução de rotinas (interpretador de comandos);
 - Salvamento de rotinas em arquivo `.txt`;
 - Comunicação serial com Arduino Mega.
 
 ## Arquitetura (resumo)
 
-- **Python (desktop):**
+- **Aplicação desktop (Python):**
   - `main.py`
   - `app.py`
   - `gui_components.py`
   - `serial_manager.py`
-- **Firmware Arduino:**
+- **Firmware (Arduino):**
   - `Servo/Servo.ino`
 - **Comunicação:**
   - Porta serial (notebook → Arduino Mega)
@@ -30,6 +30,7 @@ Desenvolver uma interface para controle de servomotores do braço robótico, vis
 ## Experimento realizado
 
 Foi implementada e validada uma rotina de **pick-and-place**, em que o braço:
+
 1. pega um objeto em uma posição inicial;
 2. transporta para outra posição;
 3. retorna o objeto à posição original.
@@ -44,21 +45,47 @@ A tarefa foi executada com sucesso em laboratório.
 - Kit Robix com servomotores
 - Cabo USB
 
-## Execução (exemplo)
+## Instalação (Python)
+
+```bash
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+# source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+> Se ainda não existir `requirements.txt`, gere com:
+```bash
+pip freeze > requirements.txt
+```
+
+## Execução
 
 1. Carregue o firmware do Arduino em `Servo/Servo.ino`.
 2. Conecte o Arduino Mega ao notebook.
 3. Execute o software Python:
-   ```bash
-   python main.py
-   ```
+
+```bash
+python main.py
+```
+
 4. Selecione a porta serial correta e inicie o controle.
 
-## Estrutura sugerida para evolução
+## Estrutura do projeto
 
-- `images/` → fotos do protótipo e interface
-- `results/` → logs e resultados de testes
-- `article/` → rascunho do artigo para submissão
+- `Servo/` → firmware Arduino
+- `images/` → fotos do protótipo e da interface (sugerido)
+- `results/` → logs e resultados de testes (sugerido)
+- `article/` → rascunho do artigo para submissão (sugerido)
+
+## Limitações atuais
+
+- Testado em ambiente de laboratório com hardware específico;
+- Dependência de configuração manual da porta serial;
+- Ausência de validação automática de colisão/limites mecânicos.
 
 ## Autores
 
